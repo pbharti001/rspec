@@ -2,7 +2,7 @@ version: 2.1
 jobs: # we now have TWO jobs, so that a workflow can coordinate them!
   one: # This is our first job.
     docker:
-      - image: cimg/ruby:2.6-node 
+      - image: cimg/ruby:2.6.3-node 
       - image: circleci/postgres:10
         environment:
           POSTGRES_USER: anviam
@@ -14,10 +14,8 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
       # - ruby/install-deps
       - run: 
           name: testing_controller
-          shell: /bin/bash --login
-          command: |
-            rvm use 2.6.3
-            bin/rails test
+#           shell: /bin/bash --login
+          command: bin/rails test
           # name: setup
           # shell: /bin/bash --login
           # command: | 
