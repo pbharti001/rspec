@@ -14,12 +14,8 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
       # - ruby/install-deps
       - run: 
           name: testing_controller
-          shell: /bin/bash
-          command: |-
-            rails test test/controllers/articles_controller_test.rb
-            rails test test/controllers/users_controller_test.rb
-            rails test test/controllers/welcome_controller_test.rb
-            rails test:system
+#           shell: /bin/bash
+          command: bin/rails test
           # name: setup
           # shell: /bin/bash --login
           # command: | 
