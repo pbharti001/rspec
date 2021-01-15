@@ -17,7 +17,9 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
       - run: 
           name: testing_controller
 #           shell: /bin/bash --login
-          command: bin/rails test
+          command: |
+            bundle install
+            bin/rails test
           # name: setup
           # shell: /bin/bash --login
           # command: | 
