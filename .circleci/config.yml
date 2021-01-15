@@ -1,0 +1,32 @@
+version: 2
+jobs: # we now have TWO jobs, so that a workflow can coordinate them!
+  one: # This is our first job.
+    docker:
+      - image: cimg/ruby:2.6-node 
+      - image: circleci/postgres:10
+        environment:
+          POSTGRES_USER: anviam
+          POSTGRES_DB: test
+          POSTGRES_HOST_AUTH_METHOD: trust
+    # Steps are a list of commands to run inside the docker container above.
+    steps:
+      - checkout # this pulls code down from GitHub
+      # - ruby/install-deps
+      - run: 
+          name: testing_controller
+          command: |-
+            rails test test/controllers/articles_controller_test.rb
+            rails test test/controllers/users_controller_test.rb
+            rails test test/controllers/welcome_controller_test.rb
+            rails test:system
+          # name: setup
+          # shell: /bin/bash --login
+          # command: | 
+            # rvm use 2.7.2 --default
+            # gem install bundler:2.2.4
+            # bundle install
+workflows:
+  version: 2
+  # one_and_two: # this is the name of our workflow
+  jobs: # and here we list the jobs we are going to run.
+    - one
