@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs: # we now have TWO jobs, so that a workflow can coordinate them!
   one: # This is our first job.
     docker:
@@ -14,6 +14,7 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
       # - ruby/install-deps
       - run: 
           name: testing_controller
+          shell: /bin/bash
           command: |-
             rails test test/controllers/articles_controller_test.rb
             rails test test/controllers/users_controller_test.rb
@@ -26,7 +27,7 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
             # gem install bundler:2.2.4
             # bundle install
 workflows:
-  version: 2
+  version: 2.1
   one: # this is the name of our workflow
     jobs: # and here we list the jobs we are going to run.
       - one
